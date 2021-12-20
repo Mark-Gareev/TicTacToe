@@ -3,7 +3,6 @@ package com.company;
 public class StringField {
 
     public static void printField(int[][] field) {
-        //String result = "";
         for (int i = 0; i < 50; i++) {
             for (int j = 0; j < 50; j++) {
                 if ((i < 5) | (j < 5) | i > 43 | j > 43)
@@ -17,6 +16,12 @@ public class StringField {
             }
             System.out.println();
         }
-        //return result;
+    }
+
+    static int[][] resetArray(int[][] field){
+        for(int i = 0; i < 50; i++)
+            for(int j = 0; j < 50; j++)
+                field[i][j] = 3; //set undefined field;
+        return field;
     }
 }

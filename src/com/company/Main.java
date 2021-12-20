@@ -11,13 +11,15 @@ public class Main {
     static int x,y;
     static int currentSymbolCode;
     static boolean player = true;
+
+
     public static void main(String[] args) {
 
         String control = "y";
         while((control.equals("y")))
         {
             Scanner scan = new Scanner(System.in);
-            resetArray();
+            field=StringField.resetArray(field);
             while (!winFlag)
             {
                 if (player) {
@@ -48,7 +50,7 @@ public class Main {
                         }
                 }
                     StringField.printField(field);
-                winFlag = winCheck(x,y,currentSymbolCode);
+                winFlag = CheckWinner.winCheck(x,y,currentSymbolCode, field, limit);
                 player = !player;
             }
             if(!player)
@@ -59,36 +61,5 @@ public class Main {
             System.out.println("Play again?\n\r y|n");
             control = scan.nextLine();
         }
-    }
-    static void resetArray(){
-        for(int i = 0; i < 50; i++)
-            for(int j = 0; j < 50; j++)
-                field[i][j] = 3; //set undefined field;
-    }
-    static boolean winCheck(int x, int y, int symbolNumber)
-    {
-        boolean innerflag = false;
-        int vector_x,vector_y,innerCounter = 1;
-        for(int i = -1;i < 2; i++)
-        {
-            for(int j = -1; j < 2; j++)
-            {
-                if((i != 0)|(j != 0))
-                {
-                    if(field[x+i][y+j] == symbolNumber)
-                    {
-                        innerCounter += 1;
-                        vector_x = i;
-                        vector_y = j;
-                        if(CheckWinner.vectorWinCheck(x,y,vector_x,vector_y,innerCounter,symbolNumber,field,limit))
-                        {
-                            innerflag = true;
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-        return innerflag;
     }
 }
