@@ -9,7 +9,7 @@ public class Main {
 
     static boolean winFlag;
     static int x,y;
-    static int currentSymbolCode;
+    static int CurrentSymbol;
     static boolean player = true;
 
 
@@ -24,11 +24,11 @@ public class Main {
             {
                 if (player) {
                     System.out.println("Player 1 turn!");
-                    currentSymbolCode = 1;
+                    CurrentSymbol = 1;
                 }
                 else {
                     System.out.println("Player 2 turn!");
-                    currentSymbolCode = 2;
+                    CurrentSymbol = 2;
                 }
 
                     while (true)
@@ -39,7 +39,7 @@ public class Main {
                             System.out.println("Put y pos in range [0:40]");
                             y = Integer.parseInt(scan.nextLine()) + 5;
                             if (field[x][y] == 3) {
-                                field[x][y] = currentSymbolCode;
+                                field[x][y] = CurrentSymbol;
                                 break;
                             }
                             System.out.println("wrong position");
@@ -50,7 +50,7 @@ public class Main {
                         }
                 }
                     StringField.printField(field);
-                winFlag = CheckWinner.winCheck(x,y,currentSymbolCode, field, limit);
+                winFlag = CheckWinner.winCheck(x,y,CurrentSymbol, field, limit);
                 player = !player;
             }
             if(!player)
