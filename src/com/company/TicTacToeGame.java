@@ -3,8 +3,9 @@ package com.company;
 import java.util.Scanner;
 
 public class TicTacToeGame {
-    static int limit = 5;
+    public static Field objectField = new Field();
 
+    static int limit = 5;
 
     static boolean winFlag;
     static int row,column;
@@ -18,7 +19,7 @@ public class TicTacToeGame {
         while((control.equals("y")))
         {
             Scanner scan = new Scanner(System.in);
-            Field.field = Field.resetField(); // No point in passing here a variable
+            objectField.resetField(); // No point in passing here a variable
             while (!winFlag)
             {
                 if (player) {
@@ -36,8 +37,8 @@ public class TicTacToeGame {
                             row = Integer.parseInt(scan.nextLine()) + 5;
                             System.out.println("Put y pos in range [0:40]");
                             column = Integer.parseInt(scan.nextLine()) + 5;
-                            if (Integer.parseInt(Field.getElement(row,column)) == 3) {
-                                Field.setElement(row,column,currentSymbolCode);
+                            if (Integer.parseInt(objectField.getElement(row,column)) == 3) {
+                                objectField.setElement(row,column, currentSymbolCode);
                                 break;
                             }
                             System.out.println("wrong position");
