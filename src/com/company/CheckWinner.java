@@ -1,8 +1,7 @@
 package com.company;
 
 public class CheckWinner {
-    public static Field objectField = TicTacToeGame.objectField; // Создаю объект класса, который можно потом кидать
-    // в другие классы
+    static FieldService fieldService = TicTacToeGame.fieldService;
 
     public static boolean checkWinnerByVector ( int x,int y,int row,int column,int count,int symbolNumber,
                                            int limit){
@@ -10,7 +9,7 @@ public class CheckWinner {
         int a = 2;
         while (count < limit) //in positive direction
         {
-            if (Integer.parseInt(objectField.getElement(x + row * a,y + column * a)) == symbolNumber)
+            if (Integer.parseInt(fieldService.getElement(x + row * a,y + column * a)) == symbolNumber)
             {
                 count++;
                 a++;
@@ -24,7 +23,7 @@ public class CheckWinner {
 
         while(count < limit)
         {
-            if (Integer.parseInt(objectField.getElement(x + (row * -a),y + (column * -a))) == symbolNumber)
+            if (Integer.parseInt(fieldService.getElement(x + (row * -a),y + (column * -a))) == symbolNumber)
             {
                 count++;
                 a++;
@@ -51,7 +50,7 @@ public class CheckWinner {
                 if((i != 0)|(j != 0))
                 {
 
-                    if(Integer.parseInt(objectField.getElement(x+i,y+j)) == symbolNumber)
+                    if(Integer.parseInt(fieldService.getElement(x+i,y+j)) == symbolNumber)
                     {
                         innerCounter += 1;
                         row = i;

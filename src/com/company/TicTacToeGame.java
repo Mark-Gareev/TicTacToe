@@ -3,7 +3,7 @@ package com.company;
 import java.util.Scanner;
 
 public class TicTacToeGame {
-    public static Field objectField = new Field();
+    static FieldService fieldService = new FieldService(new Field());
 
     static int limit = 5;
 
@@ -18,8 +18,10 @@ public class TicTacToeGame {
         String control = "y";
         while((control.equals("y")))
         {
+            winFlag= false;
             Scanner scan = new Scanner(System.in);
-            objectField.resetField(); // No point in passing here a variable
+            fieldService.resetField();
+            DisplayField.printField();
             while (!winFlag)
             {
                 if (player) {
@@ -37,8 +39,8 @@ public class TicTacToeGame {
                             row = Integer.parseInt(scan.nextLine()) + 5;
                             System.out.println("Put y pos in range [0:40]");
                             column = Integer.parseInt(scan.nextLine()) + 5;
-                            if (Integer.parseInt(objectField.getElement(row,column)) == 3) {
-                                objectField.setElement(row,column, currentSymbolCode);
+                            if (Integer.parseInt(fieldService.getElement(row,column)) == 3) {
+                                fieldService.setElement(row,column, currentSymbolCode);
                                 break;
                             }
                             System.out.println("wrong position");
@@ -57,7 +59,7 @@ public class TicTacToeGame {
             else
                 System.out.println("Player 2 wins");
             //ask to exit
-            System.out.println("Play again?\n\r y|n");
+            System.out.println("Play again?\n\ry|n");
             control = scan.nextLine();
         }
     }
