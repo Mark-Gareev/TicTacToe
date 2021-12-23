@@ -15,7 +15,7 @@ public class TicTacToeGame {
             gameVariableHolder.setWinFlag(false);
             Scanner scan = new Scanner(System.in);
             fieldService.resetField();
-            DisplayField.printField(); // Только один метод отвечает за отрисовку всего поля
+            DisplayFieldService.printField(); // Только один метод отвечает за отрисовку всего поля
             while (!gameVariableHolder.isWinFlag())
             {
                 if (gameVariableHolder.isPlayer()) {
@@ -47,7 +47,7 @@ public class TicTacToeGame {
                             System.out.println("OUT OF RANGE");
                         }
                 }
-                DisplayField.printField();
+                DisplayFieldService.printField();
                 gameVariableHolder.setWinFlag(CheckWinStatus.CheckCurrentSymbolAround());
                 gameVariableHolder.setPlayer(!gameVariableHolder.isPlayer());
             }

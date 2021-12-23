@@ -1,6 +1,6 @@
 package com.company;
 
-public class DisplayField {
+public class DisplayFieldService {
      static FieldService fieldService = TicTacToeGame.fieldService;
 
     public static void printField() {

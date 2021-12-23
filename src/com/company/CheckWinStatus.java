@@ -8,7 +8,7 @@ public class CheckWinStatus { // Бля, я ваще не ебу, как по-д
 
     public static boolean checkWinnerByVector (int row,int column,int countOccurencesInCheck){
         int multiplierByRowAndColumn = 2;
-        while (countOccurencesInCheck < gameVariableHolder.getLimit()) //in positive direction
+        while (countOccurencesInCheck <= gameVariableHolder.getLimit()) //in positive direction
         {
             if (Integer.parseInt(fieldService.getElement(gameVariableHolder.getRow() + row * multiplierByRowAndColumn,gameVariableHolder.getColumn() + column * multiplierByRowAndColumn)) == gameVariableHolder.getCurrentSymbolCode())
             {
@@ -22,7 +22,7 @@ public class CheckWinStatus { // Бля, я ваще не ебу, как по-д
         }
 
         multiplierByRowAndColumn = 1;
-        while(countOccurencesInCheck < gameVariableHolder.getLimit())
+        while(countOccurencesInCheck <= gameVariableHolder.getLimit())
         {
             if (Integer.parseInt(fieldService.getElement(gameVariableHolder.getRow() + (row * -multiplierByRowAndColumn),gameVariableHolder.getColumn() + (column * -multiplierByRowAndColumn))) == gameVariableHolder.getCurrentSymbolCode())
             {
