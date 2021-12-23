@@ -2,7 +2,7 @@ package com.company;
 
 public class Field {
 
-    int[][] field = new int[50][50];
+    int[][] field = new int[GameVariableHolder.rowSize][GameVariableHolder.columnSize];
 
     public int[][] init (){
         return field;

@@ -4,13 +4,7 @@ import java.util.Scanner;
 
 public class TicTacToeGame {
     static FieldService fieldService = new FieldService(new Field());
-
-    static int limit = 5;
-
-    static boolean winFlag;
-    static int row,column;
-    static int currentSymbolCode;
-    static boolean player = true;
+    static GameVariableHolder gameVariableHolder = new GameVariableHolder();
 
 
     public static void main(String[] args) {
@@ -18,30 +12,33 @@ public class TicTacToeGame {
         String control = "y";
         while((control.equals("y")))
         {
-            winFlag= false;
+            gameVariableHolder.setWinFlag(false); ;
             Scanner scan = new Scanner(System.in);
             fieldService.resetField();
             DisplayField.printField();
-            while (!winFlag)
+            while (!gameVariableHolder.isWinFlag())
             {
-                if (player) {
+                if (gameVariableHolder.isPlayer()) {
                     System.out.println("Player 1 turn!");
-                    currentSymbolCode = 1;
+                    gameVariableHolder.setCurrentSymbolCode(1);
                 }
                 else {
                     System.out.println("Player 2 turn!");
-                    currentSymbolCode = 2;
+                    gameVariableHolder.setCurrentSymbolCode(2);
                 }
                     while (true)
                     {
                         try {
                             System.out.println("Put x pos in range [0:40]");
-                            row = Integer.parseInt(scan.nextLine()) + 5;
+                            gameVariableHolder.setRow(Integer.parseInt(scan.nextLine()) + 5);
                             System.out.println("Put y pos in range [0:40]");
-                            column = Integer.parseInt(scan.nextLine()) + 5;
-                            if (Integer.parseInt(fieldService.getElement(row,column)) == 3) {
-                                fieldService.setElement(row,column, currentSymbolCode);
+                            gameVariableHolder.setColumn(Integer.parseInt(scan.nextLine()) + 5);
+                            if (Integer.parseInt(fieldService.getElement(gameVariableHolder.getRow(),
+                                    gameVariableHolder.getColumn())) == 3) {
+
+                                fieldService.setElement(gameVariableHolder.getRow(), gameVariableHolder.getColumn(), gameVariableHolder.getCurrentSymbolCode());
                                 break;
+
                             }
                             System.out.println("wrong position");
                         }
@@ -51,10 +48,10 @@ public class TicTacToeGame {
                         }
                 }
                 DisplayField.printField();
-                winFlag = CheckWinner.winCheck(row,column,currentSymbolCode, limit);
-                player = !player;
+                gameVariableHolder.setWinFlag(CheckWinStatus.CheckCurrentSymbolAround(gameVariableHolder.getRow(), gameVariableHolder.getColumn()));
+                gameVariableHolder.setPlayer(!gameVariableHolder.isPlayer());
             }
-            if(!player)
+            if(!gameVariableHolder.isPlayer())
                 System.out.println("Player 1 wins");
             else
                 System.out.println("Player 2 wins");
