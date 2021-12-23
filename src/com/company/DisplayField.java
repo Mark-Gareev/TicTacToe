@@ -1,8 +1,9 @@
 package com.company;
 
-public class StringField {
+public class DisplayField {
 
-    public static void printField(int[][] field) {
+    public static void printField() {
+        int[][] field = Field.field; // ВОТ ТАК НОРМ ???? ИЛИ ВЫЗЫВАТЬ ЧЕРЕЗ САМ КЛАСС ТИПА Field.field ?
         for (int i = 0; i < 50; i++) {
             for (int j = 0; j < 50; j++) {
                 if ((i < 5) | (j < 5) | i > 43 | j > 43)
@@ -18,10 +19,4 @@ public class StringField {
         }
     }
 
-    static int[][] resetArray(int[][] field){
-        for(int i = 0; i < 50; i++)
-            for(int j = 0; j < 50; j++)
-                field[i][j] = 3; //set undefined field;
-        return field;
-    }
 }

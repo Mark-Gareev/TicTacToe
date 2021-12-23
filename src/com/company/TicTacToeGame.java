@@ -2,14 +2,13 @@ package com.company;
 
 import java.util.Scanner;
 
-public class Main {
-    static int[][] field = new int[50][50];
+public class TicTacToeGame {
     static int limit = 5;
 
 
     static boolean winFlag;
-    static int x,y;
-    static int CurrentSymbol;
+    static int row,column;
+    static int currentSymbolCode;
     static boolean player = true;
 
 
@@ -19,27 +18,26 @@ public class Main {
         while((control.equals("y")))
         {
             Scanner scan = new Scanner(System.in);
-            field=StringField.resetArray(field);
+            Field.field = Field.resetField(); // No point in passing here a variable
             while (!winFlag)
             {
                 if (player) {
                     System.out.println("Player 1 turn!");
-                    CurrentSymbol = 1;
+                    currentSymbolCode = 1;
                 }
                 else {
                     System.out.println("Player 2 turn!");
-                    CurrentSymbol = 2;
+                    currentSymbolCode = 2;
                 }
-
                     while (true)
                     {
                         try {
                             System.out.println("Put x pos in range [0:40]");
-                            x = Integer.parseInt(scan.nextLine()) + 5;
+                            row = Integer.parseInt(scan.nextLine()) + 5;
                             System.out.println("Put y pos in range [0:40]");
-                            y = Integer.parseInt(scan.nextLine()) + 5;
-                            if (field[x][y] == 3) {
-                                field[x][y] = CurrentSymbol;
+                            column = Integer.parseInt(scan.nextLine()) + 5;
+                            if (Integer.parseInt(Field.getElement(row,column)) == 3) {
+                                Field.setElement(row,column,currentSymbolCode);
                                 break;
                             }
                             System.out.println("wrong position");
@@ -49,8 +47,8 @@ public class Main {
                             System.out.println("OUT OF RANGE");
                         }
                 }
-                    StringField.printField(field);
-                winFlag = CheckWinner.winCheck(x,y,CurrentSymbol, field, limit);
+                DisplayField.printField();
+                winFlag = CheckWinner.winCheck(row,column,currentSymbolCode, limit);
                 player = !player;
             }
             if(!player)
