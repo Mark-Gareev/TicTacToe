@@ -12,10 +12,10 @@ public class TicTacToeGame {
         String control = "y";
         while((control.equals("y")))
         {
-            gameVariableHolder.setWinFlag(false); ;
+            gameVariableHolder.setWinFlag(false);
             Scanner scan = new Scanner(System.in);
             fieldService.resetField();
-            DisplayField.printField();
+            DisplayField.printField(); // Только один метод отвечает за отрисовку всего поля
             while (!gameVariableHolder.isWinFlag())
             {
                 if (gameVariableHolder.isPlayer()) {
@@ -48,7 +48,7 @@ public class TicTacToeGame {
                         }
                 }
                 DisplayField.printField();
-                gameVariableHolder.setWinFlag(CheckWinStatus.CheckCurrentSymbolAround(gameVariableHolder.getRow(), gameVariableHolder.getColumn()));
+                gameVariableHolder.setWinFlag(CheckWinStatus.CheckCurrentSymbolAround());
                 gameVariableHolder.setPlayer(!gameVariableHolder.isPlayer());
             }
             if(!gameVariableHolder.isPlayer())

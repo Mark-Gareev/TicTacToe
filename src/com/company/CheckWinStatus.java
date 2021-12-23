@@ -6,11 +6,11 @@ public class CheckWinStatus { // Бля, я ваще не ебу, как по-д
     static GameVariableHolder gameVariableHolder = TicTacToeGame.gameVariableHolder;
 
 
-    public static boolean checkWinnerByVector ( int x,int y,int row,int column,int countOccurencesInCheck){
+    public static boolean checkWinnerByVector (int row,int column,int countOccurencesInCheck){
         int multiplierByRowAndColumn = 2;
         while (countOccurencesInCheck < gameVariableHolder.getLimit()) //in positive direction
         {
-            if (Integer.parseInt(fieldService.getElement(x + row * multiplierByRowAndColumn,y + column * multiplierByRowAndColumn)) == gameVariableHolder.getCurrentSymbolCode())
+            if (Integer.parseInt(fieldService.getElement(gameVariableHolder.getRow() + row * multiplierByRowAndColumn,gameVariableHolder.getColumn() + column * multiplierByRowAndColumn)) == gameVariableHolder.getCurrentSymbolCode())
             {
                 countOccurencesInCheck++;
                 multiplierByRowAndColumn++;
@@ -24,7 +24,7 @@ public class CheckWinStatus { // Бля, я ваще не ебу, как по-д
         multiplierByRowAndColumn = 1;
         while(countOccurencesInCheck < gameVariableHolder.getLimit())
         {
-            if (Integer.parseInt(fieldService.getElement(x + (row * -multiplierByRowAndColumn),y + (column * -multiplierByRowAndColumn))) == gameVariableHolder.getCurrentSymbolCode())
+            if (Integer.parseInt(fieldService.getElement(gameVariableHolder.getRow() + (row * -multiplierByRowAndColumn),gameVariableHolder.getColumn() + (column * -multiplierByRowAndColumn))) == gameVariableHolder.getCurrentSymbolCode())
             {
                 countOccurencesInCheck++;
                 multiplierByRowAndColumn++;
@@ -34,12 +34,11 @@ public class CheckWinStatus { // Бля, я ваще не ебу, как по-д
                 break;
             }
         }
-
-        return countOccurencesInCheck == gameVariableHolder.getLimit();
+        return countOccurencesInCheck == gameVariableHolder.getLimit(); // Instead of finish we can use this
     }
 
 
-    static boolean CheckCurrentSymbolAround(int x, int y)
+    static boolean CheckCurrentSymbolAround()
     {
         boolean winnerExists = false;
         int row,column,countOccurences = 1;
@@ -50,12 +49,12 @@ public class CheckWinStatus { // Бля, я ваще не ебу, как по-д
             {
                 if((i != 0)|(j != 0))
                 {
-                    if(Integer.parseInt(fieldService.getElement(x+i,y+j)) == gameVariableHolder.getCurrentSymbolCode())
+                    if(Integer.parseInt(fieldService.getElement(gameVariableHolder.getRow()+i, gameVariableHolder.getColumn()+j)) == gameVariableHolder.getCurrentSymbolCode())
                     {
                         countOccurences += 1;
                         row = i;
                         column = j;
-                        if(checkWinnerByVector(x,y,row,column,countOccurences))
+                        if(checkWinnerByVector(row,column,countOccurences))
                         {
                             winnerExists = true;
                             break;

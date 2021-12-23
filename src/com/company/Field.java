@@ -4,11 +4,6 @@ public class Field {
 
     int[][] field = new int[GameVariableHolder.rowSize][GameVariableHolder.columnSize];
 
-    public int[][] init (){
-        return field;
-    }
-
-
     public  int[][] getField() {
         return field;
     }
