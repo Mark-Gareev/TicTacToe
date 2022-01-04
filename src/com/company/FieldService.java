@@ -1,13 +1,11 @@
 package com.company;
 
 public class FieldService {
-    Field fieldObject;
     int[][] field;
     static GameVariableHolder gameVariableHolder = TicTacToeGame.gameVariableHolder;
 
 
     public FieldService(Field fieldObject){
-        this.fieldObject = fieldObject;
         field= this.fieldObject.getField();
     }
 
