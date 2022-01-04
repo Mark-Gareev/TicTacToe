@@ -3,8 +3,9 @@ package com.company;
 import java.util.Scanner;
 
 public class TicTacToeGame {
-    static FieldService fieldService = new FieldService(new Field());
-    static GameVariableHolder gameVariableHolder = new GameVariableHolder();
+    static private Field field = new Field();
+    static private FieldService fieldService = new FieldService(field);
+    static private GameVariableHolder gameVariableHolder = new GameVariableHolder();
 
 
     public static void main(String[] args) {
@@ -14,8 +15,8 @@ public class TicTacToeGame {
         {
             gameVariableHolder.setWinFlag(false);
             Scanner scan = new Scanner(System.in);
-            fieldService.resetField();
-            DisplayFieldService.printField(); // Только один метод отвечает за отрисовку всего поля
+            field.setField(fieldService.resetField()); // тут не вижу смысла кидать field.getfield, так как он просто возвращает пустое поле
+            DisplayFieldService.printField(field.getField()); // Только один метод отвечает за отрисовку всего поля
             while (!gameVariableHolder.isWinFlag())
             {
                 if (gameVariableHolder.isPlayer()) {
@@ -33,10 +34,10 @@ public class TicTacToeGame {
                             gameVariableHolder.setRow(Integer.parseInt(scan.nextLine()) + 5);
                             System.out.println("Put y pos in range [0:40]");
                             gameVariableHolder.setColumn(Integer.parseInt(scan.nextLine()) + 5);
-                            if (Integer.parseInt(fieldService.getElement(gameVariableHolder.getRow(),
+                            if (Integer.parseInt(field.getElement(gameVariableHolder.getRow(),
                                     gameVariableHolder.getColumn())) == 3) {
 
-                                fieldService.setElement(gameVariableHolder.getRow(), gameVariableHolder.getColumn(), gameVariableHolder.getCurrentSymbolCode());
+                                field.setElement(gameVariableHolder.getRow(), gameVariableHolder.getColumn(), gameVariableHolder.getCurrentSymbolCode());
                                 break;
 
                             }
@@ -47,8 +48,8 @@ public class TicTacToeGame {
                             System.out.println("OUT OF RANGE");
                         }
                 }
-                DisplayFieldService.printField();
-                gameVariableHolder.setWinFlag(CheckWinStatus.CheckCurrentSymbolAround());
+                DisplayFieldService.printField(field.getField());
+                gameVariableHolder.setWinFlag(CheckWinStatus.CheckCurrentSymbolAround(field));
                 gameVariableHolder.setPlayer(!gameVariableHolder.isPlayer());
             }
             if(!gameVariableHolder.isPlayer())
@@ -59,5 +60,15 @@ public class TicTacToeGame {
             System.out.println("Play again?\n\ry|n");
             control = scan.nextLine();
         }
+
+    }
+
+
+    public static GameVariableHolder getGameVariableHolder() {
+        return gameVariableHolder;
+    }
+
+    public static void setGameVariableHolder(GameVariableHolder gameVariableHolder) {
+        TicTacToeGame.gameVariableHolder = gameVariableHolder;
     }
 }

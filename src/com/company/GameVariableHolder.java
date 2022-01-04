@@ -2,14 +2,14 @@ package com.company;
 
 public class GameVariableHolder {
 
-    public static int rowSize = 50;
-    public static int columnSize = 50;
+    static int rowSize = 50; // тут я оставил статику, так как она не сильно кретична
+    static int columnSize = 50; // тут тож
 
-    int limit = 5;
-    boolean winFlag;
-    int row,column;
-    int currentSymbolCode;
-    boolean player = true;
+    private int limit = 5;
+    private boolean winFlag;
+    private int row,column;
+    private int currentSymbolCode;
+    private boolean player = true;
 
 
     public int getLimit() {
