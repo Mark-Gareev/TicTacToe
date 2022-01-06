@@ -2,7 +2,7 @@ package com.company;
 
 public class CheckWinStatus {
     private static GameVariableHolder gameVariableHolder = TicTacToeGame.getGameVariableHolder();
-
+// запихнуть переменные в конструктор
 
     static boolean CheckCurrentSymbolAround(Field field)
     {
