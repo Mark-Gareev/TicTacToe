@@ -8,7 +8,7 @@ public class CheckWinStatus {
     {
         boolean winnerExists = false;
         int row,column,countOccurences = 1;
-
+        // сюды гэймВэр
         for(int i = -1;i < 2; i++)
         {
             for(int j = -1; j < 2; j++)
