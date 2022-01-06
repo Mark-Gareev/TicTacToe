@@ -2,6 +2,7 @@ package com.company;
 
 public class GameVariableHolder {
 
+    //ТЕПЕРЬ ОНИ В КОНСТРУКТ
     static int rowSize = 50; // тут я оставил статику, так как она не сильно кретична
     static int columnSize = 50; // тут тож
 
