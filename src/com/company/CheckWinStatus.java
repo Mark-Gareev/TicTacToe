@@ -1,21 +1,24 @@
 package com.company;
 
 public class CheckWinStatus {
-    private static GameVariableHolder gameVariableHolder = new GameVariableHolder();
-// запихнуть переменные в конструктор
+    private GameVariableHolder gameVariableHolder;
 
-    static boolean CheckCurrentSymbolAround(Field field)
+    boolean CheckCurrentSymbolAround(Field field)
     {
         boolean winnerExists = false;
         int row,column,countOccurences = 1;
-        // сюды гэймВэр
-        for(int i = -1;i < 2; i++)
+
+        int x,y;
+        x=gameVariableHolder.getRow();
+        y=gameVariableHolder.getColumn();
+
+        for(int i = -1;i < 1; i++) // i < 2
         {
-            for(int j = -1; j < 2; j++)
+            for(int j = -1; j < 1; j++)
             {
                 if((i != 0)|(j != 0))
                 {
-                    if(Integer.parseInt(field.getElement(gameVariableHolder.getRow()+i, gameVariableHolder.getColumn()+j)) == gameVariableHolder.getCurrentSymbolCode())
+                    if(Integer.parseInt(field.getElement(x+i, y+j)) == gameVariableHolder.getCurrentSymbolCode())
                     {
                         countOccurences += 1;
                         row = i;
@@ -33,7 +36,7 @@ public class CheckWinStatus {
     }
 
 
-    public static boolean checkWinnerByVector (int row,int column,int countOccurencesInCheck, Field field){
+    public boolean checkWinnerByVector (int row,int column,int countOccurencesInCheck, Field field){
         int multiplierByRowAndColumn = 2;
 
         while (countOccurencesInCheck <= gameVariableHolder.getLimit()) //in positive direction
@@ -65,4 +68,7 @@ public class CheckWinStatus {
         return countOccurencesInCheck == gameVariableHolder.getLimit(); // Instead of finish we can use this
     }
 
+    public CheckWinStatus() {
+        this.gameVariableHolder = GameVariableHolder.getInstance();
+    }
 }

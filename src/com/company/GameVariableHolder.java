@@ -7,28 +7,42 @@ public class GameVariableHolder {
     private GameVariableHolder(){
     }
 
+        // ПРИ СОЗДАНИИ ТУТ СТАТИКИ, ТО rowsize и columnsize можно создать только если сделать их статическими, поэтому я воспользуюсь сеттером в классе Game
+//    public static GameVariableHolder getInstance(Integer row, Integer column){
+//        if (instance == null) {
+//            instance = new GameVariableHolder();
+//            this.rowSize=row;
+//            this.columnSize=column;
+//        }
+//        return instance;
+//    }
 
-    public GameVariableHolder getInstance(Integer row, Integer column){
-        if (instance == null) {
-            instance = new GameVariableHolder();
-            this.rowSize=row;
-            this.columnSize = column;
 
-        }
-        return instance;
-    }
-
-
-    public GameVariableHolder getInstance(){
+    public static GameVariableHolder getInstance(){
         if (instance == null){
             instance= new GameVariableHolder();
         }
         return instance;
     }
 
+    public int getRowSize() {
+        return rowSize;
+    }
 
-    int rowSize = 50;
-    int columnSize = 50;
+    public void setRowSize(int rowSize) {
+        this.rowSize = rowSize;
+    }
+
+    public int getColumnSize() {
+        return columnSize;
+    }
+
+    public void setColumnSize(int columnSize) {
+        this.columnSize = columnSize;
+    }
+
+    public int rowSize;
+    public int columnSize;
 
     private int limit = 5;
     private boolean winFlag;

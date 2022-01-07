@@ -3,15 +3,18 @@ package com.company;
 import java.util.Scanner;
 
 public class ConsoleMenu {
+    CheckWinStatus checkWinStatus = new CheckWinStatus();
+    DisplayFieldService displayFieldService = new DisplayFieldService();
 
     public void startGame(GameVariableHolder gameVariableHolder, Field field){
+        int limit = gameVariableHolder.getLimit();
         String control = "y";
         while((control.equals("y")))
         {
             gameVariableHolder.setWinFlag(false);
             Scanner scan = new Scanner(System.in);
-            field.resetField();
-            DisplayFieldService.printField(field.getField()); // Только один метод отвечает за отрисовку всего поля
+            field.resetField(field.getField(), gameVariableHolder.getRowSize(), gameVariableHolder.getColumnSize());
+            displayFieldService.printField(field.getField());
             while (!gameVariableHolder.isWinFlag())
             {
                 if (gameVariableHolder.isPlayer()) {
@@ -25,10 +28,11 @@ public class ConsoleMenu {
                 while (true)
                 {
                     try {
-                        System.out.println("Put x pos in range [0:40]");
-                        gameVariableHolder.setRow(Integer.parseInt(scan.nextLine()) + 5);
-                        System.out.println("Put y pos in range [0:40]");
-                        gameVariableHolder.setColumn(Integer.parseInt(scan.nextLine()) + 5);
+                        System.out.println("Put x pos in range [0:14]");
+                        gameVariableHolder.setRow(Integer.parseInt(scan.nextLine())+limit);
+                        System.out.println("Put y pos in range [0:14]");
+                        gameVariableHolder.setColumn(Integer.parseInt(scan.nextLine())+limit);
+                        System.out.println(gameVariableHolder.getRow() + " " + gameVariableHolder.getColumn());
                         if (Integer.parseInt(field.getElement(gameVariableHolder.getRow(),
                                 gameVariableHolder.getColumn())) == 3) {
 
@@ -43,8 +47,8 @@ public class ConsoleMenu {
                         System.out.println("OUT OF RANGE");
                     }
                 }
-                DisplayFieldService.printField(field.getField());
-                gameVariableHolder.setWinFlag(CheckWinStatus.CheckCurrentSymbolAround(field));
+                displayFieldService.printField(field.getField());
+                gameVariableHolder.setWinFlag(checkWinStatus.CheckCurrentSymbolAround(field));
                 gameVariableHolder.setPlayer(!gameVariableHolder.isPlayer());
             }
             if(!gameVariableHolder.isPlayer())

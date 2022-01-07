@@ -1,13 +1,11 @@
 package com.company;
 
 public class Field {
+    private int[][] field;
 
     public Field(Integer row, Integer column) {
         this.field = new int[row][column];
-        this.field = resetField();
     }
-
-    private int[][] field;
 
     public int[][] getField() {
         return field;
@@ -28,10 +26,10 @@ public class Field {
         }
     }
 
-    int[][] resetField(){
-        field = new int[50][50];
-        for(int i = 0; i < 50; i++)
-            for(int j = 0; j < 50; j++)
+
+    int[][] resetField(int[][] field, int row, int column){
+        for(int i = 0; i < row; i++)
+            for(int j = 0; j < column; j++)
                 field[i][j] = 3; //set undefined field;
         return field;
     }
