@@ -2,9 +2,33 @@ package com.company;
 
 public class GameVariableHolder {
 
-    //ТЕПЕРЬ ОНИ В КОНСТРУКТ
-    static int rowSize = 50; // тут я оставил статику, так как она не сильно кретична
-    static int columnSize = 50; // тут тож
+    private static GameVariableHolder instance;
+
+    private GameVariableHolder(){
+    }
+
+
+    public GameVariableHolder getInstance(Integer row, Integer column){
+        if (instance == null) {
+            instance = new GameVariableHolder();
+            this.rowSize=row;
+            this.columnSize = column;
+
+        }
+        return instance;
+    }
+
+
+    public GameVariableHolder getInstance(){
+        if (instance == null){
+            instance= new GameVariableHolder();
+        }
+        return instance;
+    }
+
+
+    int rowSize = 50;
+    int columnSize = 50;
 
     private int limit = 5;
     private boolean winFlag;
