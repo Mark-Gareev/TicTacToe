@@ -34,11 +34,15 @@ public class Game {
         }
 
 
-        System.out.println("Now enter your limit until the win");
+        System.out.println("Now enter your limit until the win (min is 2)");
 
         while (true)
             try{
                 limit = Integer.parseInt(scan.nextLine());
+                if (limit<=1) {
+                        limit = 2;
+
+                }
                 break;
             }catch (Exception e){
                 System.out.println("Something is wrong... Try again !");

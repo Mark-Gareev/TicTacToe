@@ -45,7 +45,6 @@ public class GameVariableHolder {
     public int columnSize;
 
     private int limit = 5;
-    private boolean winFlag;
     private int row,column;
     private int currentSymbolCode;
     private boolean player = true;
@@ -60,15 +59,6 @@ public class GameVariableHolder {
         this.limit = limit;
     }
 
-
-    public boolean isWinFlag() {
-        return winFlag;
-    }
-
-
-    public void setWinFlag(boolean winFlag) {
-        this.winFlag = winFlag;
-    }
 
 
     public int getRow() {

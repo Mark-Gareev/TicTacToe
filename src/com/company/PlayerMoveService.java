@@ -1,10 +1,23 @@
 package com.company;
 
 public class PlayerMoveService {
-    private int[][] field;
+    GameVariableHolder gameVariableHolder = GameVariableHolder.getInstance();
+    Integer move;
 
-    public PlayerMoveService(Field fieldObject){
-        field= fieldObject.getField();
+    public PlayerMoveService(){
     }
 
+
+    public int checkWhoseMove(Boolean player){
+
+        if (player) {
+            System.out.println("Player 1 turn!");
+            move=1;
+        } else {
+            System.out.println("Player 2 turn!");
+            move=2;
+        }
+        return move;
+
+    }
 }

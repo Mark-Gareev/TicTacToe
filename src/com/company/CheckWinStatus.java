@@ -8,9 +8,10 @@ public class CheckWinStatus {
         boolean winnerExists = false;
         int row,column,countOccurences = 1;
 
-        int x,y;
+        int x,y, currentSymbolcode;
         x=gameVariableHolder.getRow();
         y=gameVariableHolder.getColumn();
+        currentSymbolcode = gameVariableHolder.getCurrentSymbolCode();
 
         for(int i = -1;i < 1; i++) // i < 2
         {
@@ -18,7 +19,7 @@ public class CheckWinStatus {
             {
                 if((i != 0)|(j != 0))
                 {
-                    if(Integer.parseInt(field.getElement(x+i, y+j)) == gameVariableHolder.getCurrentSymbolCode())
+                    if(field.getElement(x+i, y+j) == currentSymbolcode )
                     {
                         countOccurences += 1;
                         row = i;
@@ -41,7 +42,7 @@ public class CheckWinStatus {
 
         while (countOccurencesInCheck <= gameVariableHolder.getLimit()) //in positive direction
         {
-            if (Integer.parseInt(field.getElement(gameVariableHolder.getRow() + row * multiplierByRowAndColumn,gameVariableHolder.getColumn() + column * multiplierByRowAndColumn)) == gameVariableHolder.getCurrentSymbolCode())
+            if (field.getElement(gameVariableHolder.getRow() + row * multiplierByRowAndColumn,gameVariableHolder.getColumn() + column * multiplierByRowAndColumn) == gameVariableHolder.getCurrentSymbolCode())
             {
                 countOccurencesInCheck++;
                 multiplierByRowAndColumn++;
@@ -55,7 +56,7 @@ public class CheckWinStatus {
         multiplierByRowAndColumn = 1;
         while(countOccurencesInCheck <= gameVariableHolder.getLimit())
         {
-            if (Integer.parseInt(field.getElement(gameVariableHolder.getRow() + (row * -multiplierByRowAndColumn),gameVariableHolder.getColumn() + (column * -multiplierByRowAndColumn))) == gameVariableHolder.getCurrentSymbolCode())
+            if (field.getElement(gameVariableHolder.getRow() + (row * -multiplierByRowAndColumn),gameVariableHolder.getColumn() + (column * -multiplierByRowAndColumn)) == gameVariableHolder.getCurrentSymbolCode())
             {
                 countOccurencesInCheck++;
                 multiplierByRowAndColumn++;

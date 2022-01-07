@@ -5,26 +5,21 @@ import java.util.Scanner;
 public class ConsoleMenu {
     CheckWinStatus checkWinStatus = new CheckWinStatus();
     DisplayFieldService displayFieldService = new DisplayFieldService();
+    PlayerMoveService playerMoveService = new PlayerMoveService();
 
     public void startGame(GameVariableHolder gameVariableHolder, Field field){
         int limit = gameVariableHolder.getLimit();
         String control = "y";
+        boolean winflag;
         while((control.equals("y")))
         {
-            gameVariableHolder.setWinFlag(false);
+            winflag=false;
             Scanner scan = new Scanner(System.in);
-            field.resetField(field.getField(), gameVariableHolder.getRowSize(), gameVariableHolder.getColumnSize());
+            field.resetField();
             displayFieldService.printField(field.getField());
-            while (!gameVariableHolder.isWinFlag())
+            while (!winflag)
             {
-                if (gameVariableHolder.isPlayer()) {
-                    System.out.println("Player 1 turn!");
-                    gameVariableHolder.setCurrentSymbolCode(1);
-                }
-                else {
-                    System.out.println("Player 2 turn!");
-                    gameVariableHolder.setCurrentSymbolCode(2);
-                }
+                gameVariableHolder.setCurrentSymbolCode(playerMoveService.checkWhoseMove(gameVariableHolder.isPlayer()));
                 while (true)
                 {
                     try {
@@ -32,9 +27,8 @@ public class ConsoleMenu {
                         gameVariableHolder.setRow(Integer.parseInt(scan.nextLine())+limit);
                         System.out.println("Put y pos in range [0:14]");
                         gameVariableHolder.setColumn(Integer.parseInt(scan.nextLine())+limit);
-                        System.out.println(gameVariableHolder.getRow() + " " + gameVariableHolder.getColumn());
-                        if (Integer.parseInt(field.getElement(gameVariableHolder.getRow(),
-                                gameVariableHolder.getColumn())) == 3) {
+                        //System.out.println(gameVariableHolder.getRow() + " " + gameVariableHolder.getColumn());
+                        if (field.getElement(gameVariableHolder.getRow(), gameVariableHolder.getColumn()) == 3) {
 
                             field.setElement(gameVariableHolder.getRow(), gameVariableHolder.getColumn(), gameVariableHolder.getCurrentSymbolCode());
                             break;
@@ -48,7 +42,7 @@ public class ConsoleMenu {
                     }
                 }
                 displayFieldService.printField(field.getField());
-                gameVariableHolder.setWinFlag(checkWinStatus.CheckCurrentSymbolAround(field));
+                winflag=(checkWinStatus.CheckCurrentSymbolAround(field));
                 gameVariableHolder.setPlayer(!gameVariableHolder.isPlayer());
             }
             if(!gameVariableHolder.isPlayer())
