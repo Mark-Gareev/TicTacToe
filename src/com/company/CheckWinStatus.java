@@ -2,16 +2,17 @@ package com.company;
 
 public class CheckWinStatus {
     private GameVariableHolder gameVariableHolder;
+    private int limit = GameVariableHolder.limit;
 
-    boolean CheckCurrentSymbolAround(Field field)
+    boolean CheckCurrentSymbolAround(Field field, int currentSymbolcode)
     {
         boolean winnerExists = false;
         int row,column,countOccurences = 1;
 
-        int x,y, currentSymbolcode;
+        int x,y;
         x=gameVariableHolder.getRow();
         y=gameVariableHolder.getColumn();
-        currentSymbolcode = gameVariableHolder.getCurrentSymbolCode();
+        //currentSymbolcode = gameVariableHolder.getCurrentSymbolCode();
 
         for(int i = -1;i < 1; i++) // i < 2
         {
@@ -24,7 +25,7 @@ public class CheckWinStatus {
                         countOccurences += 1;
                         row = i;
                         column = j;
-                        if(checkWinnerByVector(row,column,countOccurences,field))
+                        if(checkWinnerByVector(row,column,countOccurences,field, currentSymbolcode))
                         {
                             winnerExists = true;
                             break;
@@ -37,12 +38,15 @@ public class CheckWinStatus {
     }
 
 
-    public boolean checkWinnerByVector (int row,int column,int countOccurencesInCheck, Field field){
+    public boolean checkWinnerByVector (int row,int column,int countOccurencesInCheck, Field field, int currentSymbolCode){
         int multiplierByRowAndColumn = 2;
+        int gameVarRow = gameVariableHolder.getRow();
+        int gameVarCol = gameVariableHolder.getColumn();
 
-        while (countOccurencesInCheck <= gameVariableHolder.getLimit()) //in positive direction
+        while (countOccurencesInCheck <= limit) //in positive direction
         {
-            if (field.getElement(gameVariableHolder.getRow() + row * multiplierByRowAndColumn,gameVariableHolder.getColumn() + column * multiplierByRowAndColumn) == gameVariableHolder.getCurrentSymbolCode())
+            if (field.getElement(gameVarRow + row * multiplierByRowAndColumn,
+                    gameVarCol + column * multiplierByRowAndColumn) == currentSymbolCode)
             {
                 countOccurencesInCheck++;
                 multiplierByRowAndColumn++;
@@ -54,9 +58,10 @@ public class CheckWinStatus {
         }
 
         multiplierByRowAndColumn = 1;
-        while(countOccurencesInCheck <= gameVariableHolder.getLimit())
+        while(countOccurencesInCheck <= limit)
         {
-            if (field.getElement(gameVariableHolder.getRow() + (row * -multiplierByRowAndColumn),gameVariableHolder.getColumn() + (column * -multiplierByRowAndColumn)) == gameVariableHolder.getCurrentSymbolCode())
+            if (field.getElement(gameVarRow + (row * -multiplierByRowAndColumn),
+                    gameVarCol + (column * -multiplierByRowAndColumn)) == currentSymbolCode)
             {
                 countOccurencesInCheck++;
                 multiplierByRowAndColumn++;
@@ -66,7 +71,7 @@ public class CheckWinStatus {
                 break;
             }
         }
-        return countOccurencesInCheck == gameVariableHolder.getLimit(); // Instead of finish we can use this
+        return countOccurencesInCheck == GameVariableHolder.limit; // Instead of finish we can use this
     }
 
     public CheckWinStatus() {

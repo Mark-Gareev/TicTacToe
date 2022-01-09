@@ -3,10 +3,10 @@ package com.company;
 public class DisplayFieldService {
 
     private GameVariableHolder gameVariableHolder;
-    int limit;
+    private int limit = GameVariableHolder.limit;
 
     public void printField(int[][] field) {
-        limit = gameVariableHolder.getLimit();
+        System.out.println(limit + " lim");
         for (int i = 0; i < gameVariableHolder.rowSize; i++) {
             for (int j = 0; j < gameVariableHolder.columnSize; j++) {
                 if ((i < limit) | (j < limit) | i > gameVariableHolder.rowSize-limit | j > gameVariableHolder.columnSize-limit)

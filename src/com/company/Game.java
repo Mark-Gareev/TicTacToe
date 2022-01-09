@@ -10,9 +10,9 @@ public class Game {
     public void runGame(){
         Integer x,y, limit;
         Scanner scan = new Scanner(System.in);
-        System.out.println("Enter the size of the field\nFirst, enter x");
+        System.out.println("Enter the size of the field\nFirst, enter row size");
 
-        // подуматьь че делать с этой ебалой (как оптимизировать ее)
+        // вся ниже херня нужна для ввода пользователя. Не обращай внимания
         while (true) {
             try {
                 x = Integer.parseInt(scan.nextLine());
@@ -23,7 +23,7 @@ public class Game {
         }
 
 
-        System.out.println("Now enter y");
+        System.out.println("Now enter column size");
 
         while (true)
         try{
@@ -41,7 +41,6 @@ public class Game {
                 limit = Integer.parseInt(scan.nextLine());
                 if (limit<=1) {
                         limit = 2;
-
                 }
                 break;
             }catch (Exception e){
@@ -50,12 +49,19 @@ public class Game {
 
         field = new Field(x,y);
 
-        gameVariableHolder.setRowSize(x);
-        gameVariableHolder.setColumnSize(y);
-        gameVariableHolder.setLimit(limit);
+        setData(x,y,limit);
 
-        DisplayFieldService displayFieldService = new DisplayFieldService();
-        displayFieldService.printField(field.getField());
+        //DisplayFieldService displayFieldService = new DisplayFieldService();
+        //displayFieldService.printField(field.getField());
         consoleMenu.startGame(gameVariableHolder, field);
+    }
+
+    public static void setData(int row, int column, int limit){
+        GameVariableHolder.limit =limit;
+        GameVariableHolder.rowSize =row;
+        GameVariableHolder.columnSize =column;
+
+
+
     }
 }
