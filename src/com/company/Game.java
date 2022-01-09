@@ -5,11 +5,13 @@ import java.util.Scanner;
 public class Game {
     ConsoleMenu consoleMenu = new ConsoleMenu();
     private final GameVariableHolder gameVariableHolder = GameVariableHolder.getInstance();
-    Field field;
+    private Field field;
+    private Integer x,y, limit;
+    private Scanner scan;
+
 
     public void runGame(){
-        Integer x,y, limit;
-        Scanner scan = new Scanner(System.in);
+        scan = new Scanner(System.in);
         System.out.println("Enter the size of the field\nFirst, enter row size");
 
         // вся ниже херня нужна для ввода пользователя. Не обращай внимания
@@ -53,13 +55,13 @@ public class Game {
 
         //DisplayFieldService displayFieldService = new DisplayFieldService();
         //displayFieldService.printField(field.getField());
-        consoleMenu.startGame(gameVariableHolder, field);
+        consoleMenu.startGame( field);
     }
 
-    public static void setData(int row, int column, int limit){
-        GameVariableHolder.limit =limit;
-        GameVariableHolder.rowSize =row;
-        GameVariableHolder.columnSize =column;
+    private static void setData(int row, int column, int limit){
+        GameVariableHolder.setRowSize(row);
+        GameVariableHolder.setColumnSize(column);
+        GameVariableHolder.setLimit(limit);
 
 
 

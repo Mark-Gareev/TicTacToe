@@ -15,9 +15,6 @@ public class Field {
         return field;
     }
 
-    public  void setField(int[][] field) {
-        this.field = field;
-    }
 
     public  Integer getElement(int row, int column){
         return (field[row][column]);

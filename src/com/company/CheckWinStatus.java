@@ -1,31 +1,30 @@
 package com.company;
 
 public class CheckWinStatus {
-    private GameVariableHolder gameVariableHolder;
-    private int limit = GameVariableHolder.limit;
+    private int multiplierByRowAndColumn , row,column,countOccurences , limit;
+    private boolean winnerExists;
 
-    boolean CheckCurrentSymbolAround(Field field, int currentSymbolcode)
+    boolean CheckCurrentSymbolAround(Field field, int currentSymbolcode, int currentRow, int currentColumn )
     {
-        boolean winnerExists = false;
-        int row,column,countOccurences = 1;
+        winnerExists = false;
+        row=1;
+        column=1;
+        countOccurences = 1;
 
-        int x,y;
-        x=gameVariableHolder.getRow();
-        y=gameVariableHolder.getColumn();
-        //currentSymbolcode = gameVariableHolder.getCurrentSymbolCode();
 
         for(int i = -1;i < 1; i++) // i < 2
         {
-            for(int j = -1; j < 1; j++)
+            for(int j = -1; j < 1; j++) // j < 2
             {
                 if((i != 0)|(j != 0))
                 {
-                    if(field.getElement(x+i, y+j) == currentSymbolcode )
+                    if(field.getElement(currentRow+i, currentColumn+j) == currentSymbolcode )
                     {
                         countOccurences += 1;
                         row = i;
                         column = j;
-                        if(checkWinnerByVector(row,column,countOccurences,field, currentSymbolcode))
+                        if(checkWinnerByVector(row,column,countOccurences,field,
+                                currentSymbolcode, currentRow, currentColumn))
                         {
                             winnerExists = true;
                             break;
@@ -38,10 +37,10 @@ public class CheckWinStatus {
     }
 
 
-    public boolean checkWinnerByVector (int row,int column,int countOccurencesInCheck, Field field, int currentSymbolCode){
-        int multiplierByRowAndColumn = 2;
-        int gameVarRow = gameVariableHolder.getRow();
-        int gameVarCol = gameVariableHolder.getColumn();
+    public boolean checkWinnerByVector (int row,int column,int countOccurencesInCheck, Field field,
+                                        int currentSymbolCode, int gameVarRow, int gameVarCol){
+        multiplierByRowAndColumn = 2;
+        limit = GameVariableHolder.getLimit();
 
         while (countOccurencesInCheck <= limit) //in positive direction
         {
@@ -71,10 +70,7 @@ public class CheckWinStatus {
                 break;
             }
         }
-        return countOccurencesInCheck == GameVariableHolder.limit; // Instead of finish we can use this
+        return countOccurencesInCheck == GameVariableHolder.getLimit(); // Instead of finish we can use this
     }
 
-    public CheckWinStatus() {
-        this.gameVariableHolder = GameVariableHolder.getInstance();
-    }
 }

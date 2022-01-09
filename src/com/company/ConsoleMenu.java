@@ -4,11 +4,13 @@ import java.util.Scanner;
 
 public class ConsoleMenu {
     PlayerMoveService playerMoveService = new PlayerMoveService();
+    String control;
+    Scanner scan;
+    Boolean player;
 
-    public void startGame(GameVariableHolder gameVariableHolder, Field field){
-        String control = "y";
-        Scanner scan = new Scanner(System.in);
-        Boolean player;
+    public void startGame( Field field){
+        control = "y";
+        scan = new Scanner(System.in);
         while((control.equals("y")))
         {
             player = playerMoveService.playGame(field);

@@ -3,11 +3,8 @@ package com.company;
 public class GameVariableHolder {
 
     private static GameVariableHolder instance;
-    public static int rowSize;
-    public static int columnSize;
 
-    public static int limit;
-    private int row,column;
+    private static int limit ,columnSize ,rowSize ;
 
     private GameVariableHolder(){
     }
@@ -20,39 +17,28 @@ public class GameVariableHolder {
         return instance;
     }
 
-    public int getRowSize() {
+    public static int getRowSize() {
         return rowSize;
     }
 
-    public void setRowSize(int rowSize) {
-        this.rowSize = rowSize;
+    static void setRowSize(int parametr) {
+        rowSize = parametr;
     }
 
-    public int getColumnSize() {
+    public static int getColumnSize() {
         return columnSize;
     }
 
-    public void setColumnSize(int columnSize) {
-        this.columnSize = columnSize;
-    }
-
-    public int getRow() {
-        return row;
+    static void setColumnSize(int parametr) {
+        columnSize = parametr;
     }
 
 
-    public void setRow(int row) {
-        this.row = row;
+    static void setLimit(int parametr){
+        limit = parametr;
     }
 
-
-    public int getColumn() {
-        return column;
+    public static int getLimit(){
+        return limit;
     }
-
-
-    public void setColumn(int column) {
-        this.column = column;
-    }
-
 }

@@ -2,14 +2,16 @@ package com.company;
 
 public class DisplayFieldService {
 
-    private GameVariableHolder gameVariableHolder;
-    private int limit = GameVariableHolder.limit;
+    private int limit, rowSize, columnSize;
 
     public void printField(int[][] field) {
-        System.out.println(limit + " lim");
-        for (int i = 0; i < gameVariableHolder.rowSize; i++) {
-            for (int j = 0; j < gameVariableHolder.columnSize; j++) {
-                if ((i < limit) | (j < limit) | i > gameVariableHolder.rowSize-limit | j > gameVariableHolder.columnSize-limit)
+        limit =  GameVariableHolder.getLimit();
+        rowSize = GameVariableHolder.getRowSize();
+        columnSize = GameVariableHolder.getColumnSize();
+
+        for (int i = 0; i < rowSize; i++) {
+            for (int j = 0; j < columnSize; j++) {
+                if ((i < limit) | (j < limit) | i > rowSize-limit | j > columnSize-limit)
                     System.out.print("-|");
                 else if (field[i][j] == 1)
                     System.out.print("X|");
@@ -20,9 +22,5 @@ public class DisplayFieldService {
             }
             System.out.println();
         }
-    }
-
-    public DisplayFieldService() {
-        this.gameVariableHolder = GameVariableHolder.getInstance();
     }
 }
